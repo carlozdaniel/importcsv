@@ -1,9 +1,14 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ edit update destroy ]
+  before_action :set_product_buyer, only: %i[ show ]
 
+  def import
+    Product.import(params[:file])
+    redirect_to root_url, notice: "activity Data imported!"
+  end
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.includes(:seller)
   end
 
   # GET /products/1 or /products/1.json
@@ -34,6 +39,7 @@ class ProductsController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /products/1 or /products/1.json
   def update
     respond_to do |format|
@@ -59,7 +65,12 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.find_by_id(params[:id])
+    end
+
+    def set_product_buyer
+      @product = Product.find_by_id(params[:id])
+      @buyer = Order.where(product_id: params[:id]).includes(:buyer)
     end
 
     # Only allow a list of trusted parameters through.

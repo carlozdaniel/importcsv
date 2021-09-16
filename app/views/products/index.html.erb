@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+
       <th>Item</th>
       <th>Price</th>
       <th>Total</th>
@@ -19,7 +20,7 @@
         <td><%= product.item %></td>
         <td><%= product.price %></td>
         <td><%= product.total %></td>
-        <td><%= product.seller_id %></td>
+        <td><%= product.seller.name %></td>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,5 +30,11 @@
 </table>
 
 <br>
-
+<div>
+  <h4>Import that data!</h4>
+    <%= form_tag import_products_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import CSV" %>
+    <% end %>
+</div>
 <%= link_to 'New Product', new_product_path %>

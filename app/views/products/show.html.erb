@@ -1,24 +1,32 @@
 <p id="notice"><%= notice %></p>
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Total</th>
+      <th>Seller</th>
+      <th>Seller address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
+      <tr>
+        <td><%= @product.item %></td>
+        <td><%= @product.price %></td>
+        <td><%= @product.total %></td>
+        <td><%= @product.seller.name %></td>
+        <td><%= @product.seller.address %></td>
+        <td><%= link_to 'Edit', edit_product_path(@product) %></td>
+      </tr>
+  </tbody>
+</table>
+
+<% @buyer.each do |buyer| %>
 <p>
-  <strong>Item:</strong>
-  <%= @product.item %>
+  <strong>Buyer:</strong>
+  <%= buyer.buyer.name %>
 </p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @product.total %>
-</p>
-
-<p>
-  <strong>Seller:</strong>
-  <%= @product.seller_id %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<%end%>
 <%= link_to 'Back', products_path %>
