@@ -20,11 +20,6 @@ for this we used the figaro gem for security reasons
       
      $ bundle exec figaro install 
 
--- example figaro install 
-
-    create config/application.yml
-    append .gitignore
-
 - add code at file application.yml
  
       development:
@@ -40,7 +35,7 @@ for this we used the figaro gem for security reasons
       $ bin/rake db:migrate RAILS_ENV=test
 ## How to run the test suite
       
-      bundle exec rspec
+      $ bundle exec rspec
 
 ## Services (job queues, cache servers, search engines, etc.)
 
