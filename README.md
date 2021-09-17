@@ -5,20 +5,43 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+## Ruby version
+  - ruby 2.7.2p137 (2020-10-01 revision 5445e04352) 
+  - Rails 6.0.4.1
 
-* System dependencies
+## Configuration
 
-* Configuration
+      $ bundle install
+## Database creation
 
-* Database creation
+for this we used the figaro gem for security reasons 
 
-* Database initialization
+- install figaro
+      
+     $ bundle exec figaro install 
 
-* How to run the test suite
+-- example figaro install 
 
-* Services (job queues, cache servers, search engines, etc.)
+    create config/application.yml
+    append .gitignore
 
-* Deployment instructions
+- add code at file application.yml
+ 
+      development:
+        username_postgres: postgres
+        password_postgres: "123456"
+        port_postgres: "5432"
+        host_postgres: localhost
 
-* ...
+- create database
+      
+      $ rake db:create
+      $ rake db:migrate
+      $ bin/rake db:migrate RAILS_ENV=test
+## How to run the test suite
+      
+      bundle exec rspec
+
+## Services (job queues, cache servers, search engines, etc.)
+
+      $ rails server
