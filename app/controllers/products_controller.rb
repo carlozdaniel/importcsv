@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
   before_action :set_product_buyer, only: %i[ show ]
 
   def import
-    Product.import(params[:file])
-    redirect_to root_url, notice: "activity Data imported!"
+     total = Product.import(params[:file])
+    redirect_to root_url, notice: "Number registers: #{ total }"
   end
   # GET /products or /products.json
   def index

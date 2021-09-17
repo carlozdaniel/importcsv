@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 
   require 'csv'
   def self.import(file)
+    count = 0
     CSV.foreach(file.path, headers: true) do |name_buyer, item, price, total, address_seller, name_seller|
       if Seller.find_by_name(name_seller[1]).nil?
         sellers = { name: name_seller[1], address: address_seller[1] }
@@ -31,6 +32,8 @@ class Product < ApplicationRecord
 
       orders = { buyer_id: buyer.id, product_id: @product.id }
       Order.create! orders
+      count += 1
     end
+    count
   end
 end
