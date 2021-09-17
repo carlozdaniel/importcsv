@@ -1,40 +1,55 @@
-<p id="notice"><%= notice %></p>
-
+<% if notice %>
+  <p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
+<% end %>
 <h1>Products</h1>
+<h4>Import that data!</h4>
 
-<table>
-  <thead>
-    <tr>
-
-      <th>Item</th>
-      <th>Price</th>
-      <th>Total</th>
-      <th>Seller</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.item %></td>
-        <td><%= product.price %></td>
-        <td><%= product.total %></td>
-        <td><%= product.seller.name %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <div class="col-md-11 mb-2">
+    <%= form_tag import_products_path, multipart: true, class: 'form' do %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= file_field_tag :file, class: 'form-control' %>
+        </div>
+        <div class="col-md-6">
+          <%= submit_tag "Import CSV", class: 'btn btn-primary' %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
-<div>
-  <h4>Import that data!</h4>
-    <%= form_tag import_products_path, multipart: true do %>
-      <%= file_field_tag :file %>
-      <%= submit_tag "Import CSV" %>
-    <% end %>
+  <div class="col-md-1 mb-2">
+    <%= link_to 'New Product', new_product_path, class: "btn btn-primary", style: 'color: #fff;' %>
+  </div>
+
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+
+            <th>Item</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Seller</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.item %></td>
+              <td><%= product.price %></td>
+              <td><%= product.total %></td>
+              <td><%= product.seller.name %></td>
+              <td><%= link_to 'Show', product %></td>
+              <td><%= link_to 'Edit', edit_product_path(product) %></td>
+              <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-<%= link_to 'New Product', new_product_path %>
