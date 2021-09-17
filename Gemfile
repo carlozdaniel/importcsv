@@ -23,8 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 #credential security
 gem 'figaro'
-
-
+# add styles
+gem 'bootstrap-sass', '~>3.3.6'
+gem 'autoprefixer-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -51,6 +52,8 @@ group :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker', '~> 1.9'
+  gem 'database_cleaner', '~> 1.7'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
