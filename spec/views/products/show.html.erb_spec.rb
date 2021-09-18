@@ -9,12 +9,4 @@ RSpec.describe "products/show", type: :view do
       :seller => nil
     ))
   end
-
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/Item/)
-    expect(rendered).to match(/Price/)
-    expect(rendered).to match(/Total/)
-    expect(rendered).to match(//)
-  end
 end
